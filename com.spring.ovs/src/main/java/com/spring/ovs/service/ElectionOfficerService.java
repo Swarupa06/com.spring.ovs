@@ -35,18 +35,18 @@ public class ElectionOfficerService
 	
 	 }
 	 
+	 public int updateElectionOfficerDetails(ElectionOfficer officer)
+	 {
+	       	elRepo.save(officer);
+		return officer.getOfficerId();
+	       	
+	 }
+	
 	 public int deleteElectionOfficer(int officerId)
 	 {
 		  elRepo.deleteById(officerId);
 		return officerId;
 	 }
 	 
-	 public int updateElectionOfficerDetails(ElectionOfficer officer) {
-	       	elRepo.save(officer);
-			return officer.getOfficerId();
-	       	
-	 	}
-
-
     
 }
