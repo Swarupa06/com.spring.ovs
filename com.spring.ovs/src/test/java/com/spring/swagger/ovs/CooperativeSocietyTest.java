@@ -55,9 +55,9 @@ public class CooperativeSocietyTest
 	 {
 		 CooperativeSociety society=new CooperativeSociety();
 		 
-		 int societyId = 1;
-		Mockito.when(csController.viewSocietyById(societyId)).thenReturn(society);
-	     assertEquals(society,csController.viewSocietyById(societyId));
+		 int id = 1;
+		Mockito.when(csController.viewSocietyById(id)).thenReturn(society);
+	     assertEquals(society,csController.viewSocietyById(id));
 		 
 	 }
 	 
