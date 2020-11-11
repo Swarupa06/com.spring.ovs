@@ -60,8 +60,8 @@ public class CooperativeSocietyController
     public @ResponseBody CooperativeSociety  viewSocietyById(@PathVariable("societyId") int societyId) throws SocietyNotFoundException 
     {
 	
-	csService. viewSocietyById(societyId);
-	  return null;
+	return csService. viewSocietyById(societyId);
+	 
 	  
     }
     
