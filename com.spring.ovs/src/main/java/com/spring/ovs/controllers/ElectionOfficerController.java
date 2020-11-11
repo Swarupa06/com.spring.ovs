@@ -1,27 +1,28 @@
-package com.spring.ovs.controllers;
+package com.ovs.spring.demo;
 
 import java.util.List;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.ovs.dtos.ElectionOfficer;
-import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
-import com.spring.ovs.service.ElectionOfficerService;
 
 
 @RestController
-
+@RequestMapping("/officer")
 public class ElectionOfficerController
 {
  
@@ -31,37 +32,66 @@ public class ElectionOfficerController
 	private ElectionOfficerService elService;
 	
 
-    @GetMapping("/officer" )
+    @GetMapping(value= {"/"})
     public @ResponseBody List<ElectionOfficer> getAllElectionOfficers() 
     { 
-    	return elService.getAllElectionOfficers();
+    	List<ElectionOfficer> officer=elService.getAllElectionOfficers();
+    	return officer;
     }
     
-    @GetMapping("/officer/{officerId}")
-    public @ResponseBody ElectionOfficer viewElectionOfficerById(@PathVariable("officerId") int officerId) throws ElectionOfficerNotFoundException 
+    @GetMapping("/{officerId}")
+    public ResponseEntity<ElectionOfficer> viewElectionOfficerById(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
     {
-    	
-	   return elService.viewElectionOfficerById(officerId);
-	  
+       if(elService.viewElectionOfficerById(officerId)==null)
+       {
+    	   throw new ElectionOfficerNotFoundException("Election Officer not found with the Id:"+officerId); 
+       }
+       else
+       {	   
+	     return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
+       }
     }
     
-    @PostMapping("/officer")
-    public @ResponseBody ElectionOfficer addElectionOfficerDetails(@RequestBody ElectionOfficer officer) 
+    @PostMapping("/")
+    public ResponseEntity<ElectionOfficer> addElectionOfficerDetails(@RequestBody @Valid ElectionOfficer officer) throws DuplicateRecordException 
     {
-	     return elService.addElectionOfficerDetails(officer);
+	    int officerId=elService.addElectionOfficerDetails(officer);
+    	if(officerId!=0)
+    	{
+    		return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
+    	}
+    	else
+    	{
+    		throw new DuplicateRecordException("Id already exists");
+    	}
     }
     
-    @PutMapping("/officer/{officerId}")
-    public @ResponseBody ElectionOfficer updateElectionOfficerDetails(@PathVariable int officerId,@RequestBody ElectionOfficer officer ) throws ElectionOfficerNotFoundException 
+    @PutMapping("/{officerId}")
+    public ResponseEntity<ElectionOfficer> updateElectionOfficerDetails(@RequestBody @Valid ElectionOfficer officer ) throws ElectionOfficerNotFoundException 
     {
-    	
-    	return elService.updateElectionOfficerDetails(officerId,officer);
-    }
-    
-    @DeleteMapping("/officer/{officerId}")
-    public @ResponseBody int deleteElectionOfficer(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
+    	int officerId=elService.updateElectionOfficerDetails(officer);
+		if(officerId!=0)
+    	{
+			return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
+    	}
+    	else
+    	{	
+    		throw new ElectionOfficerNotFoundException("Officer not found");
+        }
+    }    
+	@DeleteMapping("/{officerId}")
+    public ResponseEntity<ElectionOfficer> deleteElectionOfficer(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
     {
-	  return elService.deleteElectionOfficer(officerId);
+    	officerId=elService.deleteElectionOfficer(officerId);
+    	if(officerId!=0)
+    	{
+    		return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
+    	}
+    	else
+    	{
+    		throw new ElectionOfficerNotFoundException("Election Officer not found with the Id:"+officerId); 
+    	}
+	    
     }
     
     
