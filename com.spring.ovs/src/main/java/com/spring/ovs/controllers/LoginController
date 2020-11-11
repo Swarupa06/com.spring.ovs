@@ -1,0 +1,62 @@
+package com.spring.ovs.controllers;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.spring.ovs.dtos.Login;
+import com.spring.ovs.service.LoginService;
+
+
+
+@Controller
+@RequestMapping("/Login")
+public class LoginController {
+	@Autowired
+	private LoginService loginService;
+	
+	@GetMapping("/{id}")
+	public @ResponseBody Login getLoginById(@PathVariable Integer id)
+	{
+		return loginService.getLoginById(id);
+		
+	}
+	@PostMapping("/")
+	public @ResponseBody Login insertLogin(@RequestBody Login login)
+	{
+		return loginService.insertLogin(login);
+	}
+	@PutMapping("/")
+	public @ResponseBody Login updateLogin(@RequestBody Login login)
+	{
+		return loginService.updateLogin(login);
+		
+	}
+	
+	@DeleteMapping("/{id}")
+	public @ResponseBody int deleteLogin(@PathVariable Integer id)
+	{
+		return loginService.deleteLoginbyId(id);
+	}
+	
+	@GetMapping("/")
+	public @ResponseBody List<Login> getAllLogin()
+	{
+		List<Login> loginlist=loginService.getAllLogins();
+		return loginlist;
+	}
+	
+	
+	
+	
+	
+	
+}
