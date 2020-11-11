@@ -34,12 +34,12 @@ public class UserController
 	
 	
 	 @PostMapping("/userdetails")
-	    public @ResponseBody User registerUser(@RequestBody User user) 
+	    public @ResponseBody User registerUser(@RequestBody@Valid User user) 
 	    {
 		     return urService.registerUser(user);
 	    }
 	 @PutMapping("/userdetails/{userId}")
-	    public @ResponseBody User updateUser(@PathVariable int userId, @RequestBody User user) throws UserNotFoundException 
+	    public @ResponseBody User updateUser(@PathVariable int userId, @RequestBody@Valid User user) throws UserNotFoundException 
 	    {
 	    	
 	    	return urService.updateUser(userId, user);
