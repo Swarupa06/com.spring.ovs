@@ -33,7 +33,7 @@ public class CooperativeSocietyController
 	
 	
 	 @PostMapping("/society")
-	    public @ResponseBody CooperativeSociety addSocietyDetails(@RequestBody CooperativeSociety  society) 
+	    public @ResponseBody CooperativeSociety addSocietyDetails(@RequestBody@Valid CooperativeSociety  society) 
 	    {
 		     return csService.addSocietyDetails(society);
 	    }
