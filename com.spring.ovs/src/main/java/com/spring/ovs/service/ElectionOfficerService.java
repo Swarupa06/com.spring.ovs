@@ -1,4 +1,4 @@
-package com.spring.ovs.service;
+package com.ovs.spring.demo;
 
 
 import java.util.ArrayList;
@@ -8,8 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.ovs.dtos.ElectionOfficer;
-import com.spring.ovs.repository.ElectionOfficerRepository;
 
 
 @Service
@@ -30,9 +28,10 @@ public class ElectionOfficerService
 	       	return elRepo.findById(officerId).get();
 	 }
 	  
-	 public ElectionOfficer addElectionOfficerDetails(ElectionOfficer officer)
+	 public int addElectionOfficerDetails(ElectionOfficer officer)
 	 {
-	      return elRepo.save(officer);
+	      elRepo.save(officer);
+	      return officer.getOfficerId();
 	
 	 }
 	 
@@ -42,8 +41,10 @@ public class ElectionOfficerService
 		return officerId;
 	 }
 	 
-	 public ElectionOfficer updateElectionOfficerDetails(int officerId,ElectionOfficer officer) {
-	       	return elRepo.save(officer);
+	 public int updateElectionOfficerDetails(ElectionOfficer officer) {
+	       	elRepo.save(officer);
+			return officer.getOfficerId();
+	       	
 	 	}
 
 
