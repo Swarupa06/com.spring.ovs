@@ -39,8 +39,8 @@ public class VotedListController{
 	@GetMapping("/ovs/{id}")
 	public @ResponseBody VotedList viewVotedListById(@PathVariable("id") int id )throws VoterNotFoundException
 	{
-		vlService.viewVotedListById(id);
-		return null;
+		return vlService.viewVotedListById(id);
+		
 	}
 	
 	@PostMapping("/ovs")
