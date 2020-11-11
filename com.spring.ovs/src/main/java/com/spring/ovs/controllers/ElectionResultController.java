@@ -1,10 +1,12 @@
-package com.spring.ovs.controllers;
+package com.ovs.spring.demo;
 
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.ovs.dtos.ElectionResult;
-import com.spring.ovs.dtos.NominatedCandidates;
-import com.spring.ovs.service.ElectionResultService;
 
 
 @RestController
@@ -35,9 +34,18 @@ Logger log = LoggerFactory.getLogger(ElectionResultController.class);
 	    }
 	 
 	 @PostMapping("/")
-	    public @ResponseBody int addElectionResult(@RequestBody ElectionResult result) 
+	    public ResponseEntity<ElectionResult> addElectionResult(@RequestBody ElectionResult result) throws DuplicateRecordException 
 	    {
-		     return erService.addElectionResult(result);
+		    int id=erService.addElectionResult(result);
+		    if(id!=0)
+		    {
+		    	return new ResponseEntity<ElectionResult>(erService.viewCandidatewiseResult(id),HttpStatus.OK);
+		    }
+		    else
+		    {
+		    	throw new DuplicateRecordException("Result with this Id already exists");
+		    }
+		    
 	    }
 	 
 	@GetMapping("/{id}")
@@ -60,22 +68,23 @@ Logger log = LoggerFactory.getLogger(ElectionResultController.class);
 		return erService.viewCandidateVotingPercent(candidateId);
 	}
 	
-	@GetMapping("/")
+	@GetMapping("/displayVotingStatistics")
 	public @ResponseBody  void displayVotingStatistics()
 	{
 		erService.displayVotingStatistics();
 	}
 	
-	@GetMapping("/{viewHighestVotingPercentCandidate}")
-	public @ResponseBody  NominatedCandidates viewHighestVotingPercentCandidate()
+	@GetMapping("/viewHighestVotingPercentCandidate/")
+	public @ResponseBody  NominatedCandidates viewHighestOrLowestVotingPercentCandidate(boolean H)
 	{
-		return erService.viewHighestVotingPercentCandidate();
-	}
-	
-	@GetMapping("/{viewLowestVotingPercentCandidate}")
-	public @ResponseBody  NominatedCandidates viewLowestVotingPercentCandidate()
-	{
-		return erService.viewLowestVotingPercentCandidate();
+		if (H==true)
+		{	
+		 return erService.viewHighestVotingPercentCandidate();
+	        }
+		else
+		{
+			return erService.viewLowestVotingPercentCandidate();
+		}
 	}
 	
 	@GetMapping("/{viewInvalidVotes}")
