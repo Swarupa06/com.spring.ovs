@@ -1,0 +1,73 @@
+package com.spring.ovs.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.spring.ovs.dtos.Login;
+import com.spring.ovs.exceptions.InvalidOperation;
+import com.spring.ovs.repository.LoginRepository;
+import com.spring.ovs.utility.ValidateLogin;
+
+@Service
+public class LoginService {
+@Autowired
+private LoginRepository loginRepo;
+
+public Login getLoginById(Integer id) {
+	try {
+		return loginRepo.findById(id).get();
+	}
+	catch(InvalidOperation e) {
+		e.printStackTrace();
+		return null;
+	}
+}
+public Login insertLogin(Login login) {
+	
+	String name=login.getLoginName();
+	
+	if(name.matches(ValidateLogin.nameregex) && login.getLoginPassword().matches(ValidateLogin.passwordregex))
+	{
+		return loginRepo.save(login);
+	}
+	
+	else{
+		
+		throw new InvalidOperation("Login not inserted");
+	}
+
+}
+public Login updateLogin(Login login) {
+	if(login!=null && login.getLoginName().matches(ValidateLogin.nameregex) && login.getLoginPassword().matches(ValidateLogin.passwordregex))
+	{
+		loginRepo.save(login);
+		return login;
+	}
+	else
+	{
+		throw new InvalidOperation("Login not updated");
+		
+	}
+}
+
+public int deleteLoginbyId(Integer id) {
+	try {
+		  loginRepo.deleteById(id);
+		return id;
+	}
+	catch(InvalidOperation ie)
+	{
+		throw new InvalidOperation("Login not deleted");
+	}
+
+}
+public List<Login> getAllLogins() {
+	List<Login> loginlist=new ArrayList<Login>();
+	loginRepo.findAll().forEach(login->loginlist.add(login));
+	return loginlist;
+}
+
+}
