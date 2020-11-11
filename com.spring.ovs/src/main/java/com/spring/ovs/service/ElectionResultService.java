@@ -1,15 +1,13 @@
-package com.spring.ovs.service;
+package com.ovs.spring.demo;
 
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.ovs.dtos.ElectionResult;
-import com.spring.ovs.dtos.NominatedCandidates;
-import com.spring.ovs.repository.ElectionResultRepository;
 
 @Service
 public class ElectionResultService {
@@ -59,7 +57,24 @@ public class ElectionResultService {
 		
 	}
 	
-	public  NominatedCandidates viewHighestVotingPercentCandidate()
+	public  NominatedCandidates viewHighestOrLowestVotingPercentCandidate(boolean H)
+	{
+		
+		System.out.println("Enter the character H to view the Highest voting percentage candidate or It will display the Lowest voting percentage candidate");
+		@SuppressWarnings("resource")
+		Scanner sc=new Scanner(System.in);
+		sc.nextBoolean();
+		if (H==true)
+		{	
+		 return erRepo.viewHighestVotingPercentCandidate();
+	    }
+		else
+		{
+			return erRepo.viewLowestVotingPercentCandidate();
+		}
+	}
+	
+	public  NominatedCandidates viewHighestVotingPercentCandidate() 
 	{
 		
 		return erRepo.viewHighestVotingPercentCandidate();
@@ -93,5 +108,7 @@ public class ElectionResultService {
 		erRepo.displayPollingResult();
 		
 	}
+
+	
 	
 }
