@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
-import com.ovs.spring.demo.dtos.ElectionOfficer;
-import com.ovs.spring.demo.exceptions.ElectionOfficerNotFoundException;
-import com.ovs.spring.demo.service.ElectionOfficerService;
+import com.spring.ovs.dtos.ElectionOfficer;
+import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
+import com.spring.ovs.service.ElectionOfficerService;
 
 
 //connect from postman as http://localhost:8080/officer/
@@ -33,7 +33,7 @@ public class ElectionOfficerController
       
 	  /*A Logger object is used to log messages for a specific system or application component.
 	   *Loggers are normally named,using a hierarchical dot-separated namespace.
-       */
+           */
 	
 	  Logger log = LoggerFactory.getLogger(ElectionOfficerController.class);
 	
