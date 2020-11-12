@@ -13,10 +13,13 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.spring.ovs.controllers.CooperativeSocietyController;
-import com.spring.ovs.dtos.CooperativeSociety;
-import com.spring.ovs.exceptions.SocietyNotFoundException;
-import com.spring.ovs.service.CooperativeSocietyService;
+import com.spring.swagger.ovs.controllers.CooperativeSocietyController;
+import com.spring.swagger.ovs.dtos.CooperativeSociety;
+import com.spring.swagger.ovs.exceptions.SocietyNotFoundException;
+import com.spring.swagger.ovs.service.CooperativeSocietyService;
+
+
+
 
 
 @ExtendWith(MockitoExtension.class)
@@ -24,60 +27,61 @@ public class CooperativeSocietyTest
 {
     
 	@Mock
-	CooperativeSocietyService  csServices;
+	CooperativeSocietyService csServices;
 	
 
 	@InjectMocks
-	CooperativeSocietyController  csController;
+	CooperativeSocietyController csController;
 
-	
 	@Test
-	public void testaddSocietyDetails()
+	public void testAddElectionOfficerDetails() 
 	{
-		
-		CooperativeSociety society =new CooperativeSociety();   
-		Mockito.when(csController.addSocietyDetails(society)).thenReturn(society);
-        assertEquals(society,csController.addSocietyDetails(society));
-        
-	}
+		CooperativeSociety society =new CooperativeSociety();
+		int societyId = 1;
+		Mockito.when(csController.addSocietyDetails(society)).thenReturn(societyId);
+		assertEquals(societyId,csController.addSocietyDetails(society));
+	 }
 	
 	 @Test
 	 public void testGetAllCooperativeSocieties()
-	 {
-	        List<CooperativeSociety> society=new ArrayList<CooperativeSociety>();
-	       Mockito.when(csController.getAllCooperativeSocieties()).thenReturn(society);
-	        assertEquals(society,csController.getAllCooperativeSocieties());
+     {
+	     List<CooperativeSociety> society=new ArrayList<CooperativeSociety>();
+	     Mockito.when(csController.getAllCooperativeSocieties()).thenReturn(society);
+	     assertEquals(society,csController.getAllCooperativeSocieties());
 
-	 }
+	  }
 	 
 	 @Test
-	 public void testviewSocietyById() throws SocietyNotFoundException 
+	 public void testfindSocietyById() throws SocietyNotFoundException
 	 {
 		 CooperativeSociety society=new CooperativeSociety();
-		 
-		 int id = 1;
-		Mockito.when(csController.viewSocietyById(id)).thenReturn(society);
-	     assertEquals(society,csController.viewSocietyById(id));
-		 
+		 int societyId = 1;
+		Mockito.when(csController.viewSocietyById(societyId)).thenReturn(society);
+	     assertEquals(society,csController.viewSocietyById(societyId)); 
 	 }
 	 
 	 @Test
-	 public void testupdateSocietyDetails()throws SocietyNotFoundException
+	 public void testUpdateSocietyDetails()throws SocietyNotFoundException
 	 {
-		 CooperativeSociety society=new  CooperativeSociety();
-		Mockito.when(csController.updateSocietyDetails(society)).thenReturn(society);
-		assertEquals(society,csController.updateSocietyDetails(society));
+		 CooperativeSociety society=new CooperativeSociety();
+		int societyId = 1;
+		Mockito.when(csController.updateSocietyDetails(societyId, society)).thenReturn(society);
+		assertEquals(society,csController.updateSocietyDetails(societyId, society));
 
-	}	
+	 }
 	 
 	 @Test
-	 public void testdeleteSociety() throws SocietyNotFoundException
+	 public void testDeleteSociety() throws SocietyNotFoundException
 	 {
 	 	
-		int societyId = 1;
+	 	int societyId = 1;
 		Mockito.when(csController.deleteSociety(societyId)).thenReturn(societyId);
 	 	assertEquals(societyId,csController.deleteSociety(societyId));
 	 	
 	 }
-	 
 }
+
+
+
+
+
