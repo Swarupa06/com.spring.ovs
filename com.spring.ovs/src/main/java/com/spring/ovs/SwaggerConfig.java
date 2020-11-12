@@ -35,7 +35,9 @@ public class SwaggerConfig {
 				ant("/candidate/**"),
 				ant("/results/**"),
 				ant("/ovs/**"),
-				ant("/userdetails/**")
+				ant("/userdetails/**"),
+			ant("/admin/**),
+			    ant("/login/**)
 				);
 	}
 
