@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring.swagger.ovs.dtos.User;
-import com.spring.swagger.ovs.exceptions.UserNotFoundException;
-import com.spring.swagger.ovs.service.UserService;
+import com.spring.ovs.dtos.User;
+import com.spring.ovs.exceptions.UserNotFoundException;
+import com.spring.ovs.service.UserService;
 
 @Controller
 @RequestMapping("/userdetails")
