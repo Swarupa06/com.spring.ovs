@@ -1,4 +1,4 @@
-package com.ovs.spring.demo.controllers;
+package com.spring.ovs.controllers;
 
 import java.util.List;
 
