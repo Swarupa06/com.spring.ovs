@@ -1,7 +1,0 @@
-package com.spring.ovs.utility;
-
-public class ValidateLogin {
-	public static String passwordregex="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}"; //min 8 characters,one uppercase letter,one lowercase and one number
-	public static String nameregex="[A-za-z]{3,}";
-
-}
