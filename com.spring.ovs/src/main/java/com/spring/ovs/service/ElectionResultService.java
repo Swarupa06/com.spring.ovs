@@ -1,4 +1,4 @@
-package com.ovs.spring.demo;
+package com.spring.ovs;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.swagger.ovs.dao.ElectionOfficerDao;
-import com.spring.swagger.ovs.dtos.ElectionOfficer;
-import com.spring.swagger.ovs.exceptions.ElectionOfficerNotFoundException;
+import com.spring.ovs.dao.ElectionOfficerDao;
+import com.spring.ovs.dtos.ElectionOfficer;
+import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
 
 
 @Service
