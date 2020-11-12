@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.ovs.dtos.ElectionOfficer;
 import com.spring.ovs.service.ElectionOfficerService;
-import com.spring.swagger.ovs.exceptions.ElectionOfficerNotFoundException;
+import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
 
 //connect from postman as http://localhost:8080/officer/
 @Controller
