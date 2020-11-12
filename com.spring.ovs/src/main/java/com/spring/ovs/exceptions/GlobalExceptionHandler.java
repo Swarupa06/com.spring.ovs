@@ -33,8 +33,24 @@ public class GlobalExceptionHandler {
 	    	System.out.println("1");
 	        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
 	    }
+	
 
 	 @ExceptionHandler(SocietyNotFoundException.class)
+	    @ResponseStatus(value=HttpStatus.NOT_FOUND)
+	    public ResponseEntity<Object> resouceNotFoundException(SocietyNotFoundException ex, WebRequest request) {
+	    	ExceptionDetails exceptionDetails = new ExceptionDetails(new Date(), ex.getMessage(), request.getDescription(false));
+	    	System.out.println("1");
+	        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
+	    }
+	@ExceptionHandler(VoterNotFoundException.class)
+	    @ResponseStatus(value=HttpStatus.NOT_FOUND)
+	    public ResponseEntity<Object> resouceNotFoundException(UserNotFoundException ex, WebRequest request) {
+	    	ExceptionDetails exceptionDetails = new ExceptionDetails(new Date(), ex.getMessage(), request.getDescription(false));
+	    	System.out.println("1");
+	        return new ResponseEntity<>(exceptionDetails, HttpStatus.NOT_FOUND);
+	    }
+
+	 @ExceptionHandler(NominatedCandidateNotFoundException.class)
 	    @ResponseStatus(value=HttpStatus.NOT_FOUND)
 	    public ResponseEntity<Object> resouceNotFoundException(SocietyNotFoundException ex, WebRequest request) {
 	    	ExceptionDetails exceptionDetails = new ExceptionDetails(new Date(), ex.getMessage(), request.getDescription(false));
