@@ -27,7 +27,7 @@ RegisteredSocietyVotersService rsvService;
 RegisteredSocietyVotersController rsvController;
 
 @Test
-public  void voterRegistration()
+public  void voterRegistration() throws VoterNotFoundException
 {
 	RegisteredSocietyVoters voter=new RegisteredSocietyVoters();
 	Mockito.when(rsvController.voterRegistration(voter)).thenReturn(voter);
