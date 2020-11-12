@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 
-
 @Entity
 @Table(name="officer")
 public class ElectionOfficer {
@@ -151,9 +150,9 @@ public class ElectionOfficer {
 	public void setPincode(int pincode) {
 		this.pincode = pincode;
 	}
-}	
 	
-	/*public ElectionOfficer() {
+	
+	public ElectionOfficer() {
 		super();
 	}
 	
@@ -187,35 +186,16 @@ public class ElectionOfficer {
 		this.district = district;
 		this.pincode = pincode;
 	}
-	*/
 	
-	/*@Override
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		sb.append("ElectionOfficer{");
-		sb.append("officerId:").append(officerId).append(",");
-		sb.append("firstName:").append(firstName).append(",");
-		sb.append("lastName:").append(lastName).append(",");
-		sb.append("password:").append(password).append(",");
-		sb.append("gender:").append(gender).append(",");
-		sb.append("mobileno:").append(mobileno).append(",");
-		sb.append("emailId:").append(emailId).append(",");
-		sb.append("address1:").append(address1).append(",");
-		sb.append("address2:").append(address2).append(",");
-		sb.append("district:").append(district).append(",");
-		sb.append("pincode:").append( pincode).append(",");
-		sb.append("}");
-		
-		return sb.toString();
-	}
-}
 
-/*@Override
-public String toString() {
-	return "ElectionOfficer [officerId=" + officerId + ", firstName=" + firstName + ", lastName=" + lastName
+
+   @Override
+   public String toString()
+   {
+	  return "ElectionOfficer [officerId=" + officerId + ", firstName=" + firstName + ", lastName=" + lastName
 			+ ", password=" + password + ", gender=" + gender + ", mobileno=" + mobileno + ", emailId=" + emailId
 			+ ", address1=" + address1 + ", address2=" + address2 + ", district=" + district + ", pincode="
 			+ pincode + "]";
-}*/
+   }
+}
 
