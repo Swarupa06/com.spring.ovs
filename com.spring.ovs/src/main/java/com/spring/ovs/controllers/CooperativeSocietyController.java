@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring.swagger.ovs.dtos.CooperativeSociety;
-import com.spring.swagger.ovs.exceptions.SocietyNotFoundException;
-import com.spring.swagger.ovs.service.CooperativeSocietyService;
+import com.spring.ovs.dtos.CooperativeSociety;
+import com.spring.ovs.exceptions.SocietyNotFoundException;
+import com.spring.ovs.service.CooperativeSocietyService;
 
 @Controller
 @RequestMapping("/society")
