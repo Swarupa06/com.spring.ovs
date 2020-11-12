@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.swagger.ovs.dtos.User;
-import com.spring.swagger.ovs.exceptions.UserNotFoundException;
-import com.spring.swagger.ovs.repository.UserRepository;
+import com.spring.ovs.dtos.User;
+import com.spring.ovs.exceptions.UserNotFoundException;
+import com.spring.ovs.repository.UserRepository;
 
 
 @Service//class that provides business services.
