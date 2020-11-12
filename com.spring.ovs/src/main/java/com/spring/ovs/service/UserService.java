@@ -1,54 +1,120 @@
 package com.spring.ovs.service;
 
-
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.ovs.dtos.User;
-import com.spring.ovs.repository.UserRepository;
+import com.spring.swagger.ovs.dtos.User;
+import com.spring.swagger.ovs.exceptions.UserNotFoundException;
+import com.spring.swagger.ovs.repository.UserRepository;
 
 
-@Service
-public class UserService 
-{
+@Service//class that provides business services.
+public class UserService {
+
 	@Autowired
-	UserRepository urRepo;
+	private UserRepository urRepository;
 	
+
+	/*
+	  * This is the method for Registering User and if we give the existing ID and execute it then
+	  * in ResponseBody it will show zero and in console it prints "The Result with this ID already exists...Give another value".
+	*/
+
+	public int registerUser(User user)
+	{
+		if(urRepository.existsById(user.getUserId()))
+		{
+		     return 0;
+		}
+		else
+		{
+		   return urRepository.save(user).getUserId();
+		}
+			 
+	}
+	/*
+	 * This Method is used to update the user details
+	 */
+	
+    public User updateUser(int userId, User user) throws UserNotFoundException
+    {
+
+	      Optional<User> repUser = urRepository.findById(userId);
+
+	        if (repUser.isPresent()) {
+
+		    User userToBeUpdated = repUser.get();
+		    userToBeUpdated.setPassword(user.getPassword());
+		    userToBeUpdated.setFirstName(user.getFirstName());
+		    userToBeUpdated.setLastName(user.getLastName());
+		    userToBeUpdated.setEmail(user.getEmail());
+		    userToBeUpdated.setContactno(user.getContactno());
+		   
+		    return urRepository.save(userToBeUpdated);
+	      }
+	      else
+	      {
+				throw new UserNotFoundException("No User present with the given Id to Update...Please enter valid Id to update");
+
+	      }
+      }
+    /*
+     * This method is used to delete the user with respective given userId
+     */
+      
+     public int deleteUser(int userId) throws UserNotFoundException
+     {
+    	 Optional<User> repUser = urRepository.findById(userId);
+    		 
+    	  if(repUser.isPresent())
+    	   {
+    	      urRepository.deleteById(userId);
+              System.out.println("User details are deleted Successfully");
+    		}
+    	    else
+    		{
+    		    throw new UserNotFoundException("Enter valid Id to be deleted");
+    		}
+		    return userId;
+      }
+     
+     /* 
+	   * This method is used to get the Userdetails with respective  given userId. 
+	*/
+    
+	 public User findByUserId(int userId) throws UserNotFoundException
+	 {
+	      Optional<User> repUser = urRepository.findById(userId);
+	      
+	      if(repUser.isPresent())
+	      {
+			 return repUser.get();
+		  }
+	      else
+	      {
+  		    throw new UserNotFoundException("Enter valid Id to view the User details"); 
+	      }
+		
+	 }
+	 
+
+	 /*
+	    * This method is used to view the User List. 
+	 */
+	 
 	 public List<User> getAllUsers()
 	 {
-		 List<User> user = new ArrayList<User>();
+	 
 		System.out.println("Users...");
-	 urRepo.findAll().forEach(user1 -> user.add(user1));
-	 return user;
+		return urRepository.findAll();
 	 }
-	 public User findByUserId(int userId) 
-	 {
-		 return urRepo.findById(userId).get();
-	 }
-	 
-	 public User registerUser(User user)
-	 {
-	     return  urRepo.save(user);
-
-	 }
-	 
-	 
-	 public int deleteUser(int userId)
-	 {
-		  urRepo.deleteById(userId);
-		return userId;
-	 }
-	 public User updateUser(int userId,User user) {
-	       	
-	      return urRepo.save(user);
-	       	
-	 	}
-	
 }
+
+
+
 
 
 
