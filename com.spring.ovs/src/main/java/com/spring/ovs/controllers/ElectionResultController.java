@@ -1,4 +1,4 @@
-package com.spring.swagger.ovs.controllers;
+package com.spring.ovs.controllers;
 
 import java.util.List;
 
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.swagger.ovs.dtos.ElectionResult;
-import com.spring.swagger.ovs.dtos.NominatedCandidates;
-import com.spring.swagger.ovs.service.ElectionResultService;
+import com.spring.ovs.dtos.ElectionResult;
+import com.spring.ovs.dtos.NominatedCandidates;
+import com.spring.ovs.service.ElectionResultService;
 
 //connect from postman as http://localhost:8080/results/
 @RestController
