@@ -19,7 +19,7 @@ import com.spring.ovs.dtos.Admin;
 import com.spring.ovs.service.AdminService;
 
 @Controller
-@RequestMapping("/Admins")
+@RequestMapping("/admin")
 public class AdminController {
 	Logger log = LoggerFactory.getLogger(AdminController.class);
 		@GetMapping("/hi")
