@@ -29,8 +29,8 @@ public class SwaggerConfig {
 	@SuppressWarnings("unchecked")
 	private Predicate<String> pathsToBeDocumented() {
 		return or(
-				ant("/admin/**),
-			        ant("/login/**),
+				ant("/admin/**"),
+			        ant("/login/**"),
 				ant("/society/**"),
 				ant("/reg_society/**"),
 				ant("/candidate/**"),
