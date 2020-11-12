@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.ovs.dtos.ElectionOfficer;
 import com.spring.ovs.repository.ElectionOfficerRepository;
-import com.spring.swagger.ovs.exceptions.ElectionOfficerNotFoundException;
+import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
 
 
 @Service
