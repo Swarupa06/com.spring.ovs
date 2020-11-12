@@ -33,7 +33,7 @@ public class SwaggerConfig {
 				ant("/society/**"),
 				ant("/reg_society/**"),
 				ant("/candidate/**"),
-				ant("/EResult/**"),
+				ant("/results/**"),
 				ant("/ovs/**"),
 				ant("/userdetails/**")
 				);
