@@ -24,17 +24,50 @@ public class LoginController {
 	private LoginService loginService;
 	
 	@GetMapping("/{id}")
+	/*
+     * @Author:Gowthami
+     * 
+     * @Method:getLoginById()
+     * 
+     * Return type:integer
+     * 
+     * @Parameter:id
+     * 
+     * @description: This method allows you to get the login by Id, if you enter existing Id, you can get the login details, if not exists it will throw an exception of "Login could not find".
+     */
 	public @ResponseBody Login getLoginById(@PathVariable Integer id)
 	{
 		return loginService.getLoginById(id);
 		
 	}
 	@PostMapping("/")
+	/*
+     * @Author:Gowthami
+     * 
+     * @Method:insertLogin()
+     * 
+     * Return type:String
+     * 
+     * @Parameter:Login
+     * 
+     * @description: This method allows you to insert the login , Login should match with respect to given validation,then login can be inserted. 
+     */
 	public @ResponseBody Login insertLogin(@RequestBody Login login)
 	{
 		return loginService.insertLogin(login);
 	}
 	@PutMapping("/")
+	/*
+     * @Author:Gowthami
+     * 
+     * @Method:updateLogin()
+     * 
+     * Return type:String
+     * 
+     * @Parameter:login
+     * 
+     * @description: This method allows you to update the login by, if your login matches with the validation, login can be updated, if not it throw an exception of "Login not updated".
+     */
 	public @ResponseBody Login updateLogin(@RequestBody Login login)
 	{
 		return loginService.updateLogin(login);
@@ -42,12 +75,34 @@ public class LoginController {
 	}
 	
 	@DeleteMapping("/{id}")
+	/*
+     * @Author:Gowthami
+     * 
+     * @Method:DeleteLogin()
+     * 
+     * Return type:integer
+     * 
+     * @Parameter:id
+     * 
+     * @description: This method allows you to delete the login by Id, if you enter existing Id, your login can be deleted, if not it throws an exception "Login cant delete". 
+     */
 	public @ResponseBody int deleteLogin(@PathVariable Integer id)
 	{
 		return loginService.deleteLoginbyId(id);
 	}
 	
 	@GetMapping("/")
+	/*
+     * @Author:Gowthami
+     * 
+     * @Method:getallLogin()
+     * 
+     * Return type:list
+     * 
+     * @Parameter:login
+     * 
+     * @description: This method allows you to list out all the logins. 
+     */
 	public @ResponseBody List<Login> getAllLogin()
 	{
 		List<Login> loginlist=loginService.getAllLogins();
