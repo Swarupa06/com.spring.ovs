@@ -17,7 +17,17 @@ public class GlobalExceptionHandler
 		ErrorDetails errormessage=new ErrorDetails("OfficerNotFound",exception.getMessage() ,new Date());
 		return new ResponseEntity<>(errormessage,HttpStatus.NOT_FOUND);
 	}
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<?> UserNotFoundHandling(UserNotFoundException exception){
+		ErrorDetails errormessage=new ErrorDetails("UserNotFound",exception.getMessage() ,new Date());
+		return new ResponseEntity<>(errormessage,HttpStatus.NOT_FOUND);
+	}
 	
+		@ExceptionHandler(SocietyNotFoundException.class)
+		public ResponseEntity<?> UserNotFoundHandling(SocietyNotFoundException exception){
+			ErrorDetails errormessage=new ErrorDetails("SocietyNotFound",exception.getMessage() ,new Date());
+			return new ResponseEntity<>(errormessage,HttpStatus.NOT_FOUND);
+		}
 	
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
