@@ -1,9 +1,12 @@
-package com.ovs.spring.demo;
+package com.spring.swagger.ovs;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 import org.junit.jupiter.api.Test;
 
+import com.spring.ovs.dtos.ElectionOfficer;
+import com.spring.ovs.service.ElectionOfficerService;
 
 
 public class ElectionOfficerTest
