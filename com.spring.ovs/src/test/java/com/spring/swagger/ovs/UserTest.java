@@ -12,10 +12,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.spring.swagger.ovs.controllers.UserController;
-import com.spring.swagger.ovs.dtos.User;
-import com.spring.swagger.ovs.exceptions.UserNotFoundException;
-import com.spring.swagger.ovs.service.UserService;
+import com.spring.ovs.controllers.UserController;
+import com.spring.ovs.dtos.User;
+import com.spring.ovs.exceptions.UserNotFoundException;
+import com.spring.ovs.service.UserService;
 
 
 
