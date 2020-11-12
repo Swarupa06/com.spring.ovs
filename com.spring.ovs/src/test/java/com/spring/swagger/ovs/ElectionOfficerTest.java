@@ -1,4 +1,4 @@
-package com.spring.swagger.ovs;
+package com.spring.ovs;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.spring.ovs.controllers.ElectionOfficerController;
 import com.spring.ovs.dtos.ElectionOfficer;
 import com.spring.ovs.service.ElectionOfficerService;
-import com.spring.swagger.ovs.exceptions.ElectionOfficerNotFoundException;
+import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
 
 
 
