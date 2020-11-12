@@ -1,6 +1,5 @@
 package com.spring.swagger.ovs;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -13,14 +12,18 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.spring.ovs.controllers.UserController;
-import com.spring.ovs.dtos.User;
-import com.spring.ovs.exceptions.UserNotFoundException;
-import com.spring.ovs.service.UserService;
+import com.spring.swagger.ovs.controllers.UserController;
+import com.spring.swagger.ovs.dtos.User;
+import com.spring.swagger.ovs.exceptions.UserNotFoundException;
+import com.spring.swagger.ovs.service.UserService;
+
+
+
 
 
 @ExtendWith(MockitoExtension.class)
-public class UserTest{
+public class UserTest
+{
     
 	@Mock
 	UserService urServices;
@@ -29,45 +32,45 @@ public class UserTest{
 	@InjectMocks
 	UserController urController;
 
-	
 	@Test
 	public void testregisterUser() 
 	{
-		
-		 User user =new User(); 
-	     Mockito.when(urController.registerUser(user)).thenReturn(user);
-		 assertEquals(user,urController.registerUser(user));
-				
-	}
+		 User user =new User();
+		int userId = 1;
+		Mockito.when(urController.registerUser(user)).thenReturn(userId);
+		assertEquals(userId,urController.registerUser(user));
+	 }
+	
 	 @Test
 	 public void testGetAllUsers()
-	 {
-	        List<User> user=new ArrayList<User>();
-	       Mockito.when(urController.getAllUsers()).thenReturn(user);
-	        assertEquals(user,urController.getAllUsers());
+     {
+	     List<User> user=new ArrayList<User>();
+	     Mockito.when(urController.getAllUsers()).thenReturn(user);
+	     assertEquals(user,urController.getAllUsers());
 
-	   }
+	  }
+	 
 	 @Test
-	 public void testUserById() throws UserNotFoundException 
+	 public void tesUserById() throws UserNotFoundException
 	 {
 		 User user=new User();
-		 int userId=1;
-		 Mockito.when(urController.findByUserId(userId)).thenReturn(user);
+		 int userId = 1;
+		Mockito.when(urController.findByUserId(userId)).thenReturn(user);
 	     assertEquals(user,urController.findByUserId(userId)); 
 	 }
 	 
 	 @Test
-	 public void testupdateUser()throws UserNotFoundException
+	 public void testUpdateUser()throws UserNotFoundException
 	 {
-		User user=new User();
-		int userId=1;
+		 User user=new User();
+		int userId = 1;
 		Mockito.when(urController.updateUser(userId, user)).thenReturn(user);
-		assertEquals(user,urController.updateUser(userId,user));
+		assertEquals(user,urController.updateUser(userId, user));
 
 	 }
 	 
 	 @Test
-	 public void testdeleteUser() throws UserNotFoundException
+	 public void testDeleteUser() throws UserNotFoundException
 	 {
 	 	
 	 	int userId = 1;
@@ -75,5 +78,10 @@ public class UserTest{
 	 	assertEquals(userId,urController.deleteUser(userId));
 	 	
 	 }
-	 
 }
+
+
+
+
+
+
