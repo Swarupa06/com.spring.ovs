@@ -1,4 +1,6 @@
 package com.spring.swagger.ovs;
+
+	 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
@@ -10,8 +12,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.ResponseEntity;
 
 import com.spring.ovs.controllers.VotedListController;
+import com.spring.ovs.dtos.NominatedCandidates;
 import com.spring.ovs.dtos.VotedList;
 import com.spring.ovs.exceptions.VoterNotFoundException;
 import com.spring.ovs.service.VotedListService;
@@ -26,12 +30,14 @@ public class VotedListTest{
 	@InjectMocks
 	VotedListController voController;
 
+	
 	@Test
-	public void testAddVotedListDetails()
+	public void testAddVotedListDetails() 
 	{
-		 VotedList votedList =new VotedList();   
-	     Mockito.when(voController.addVotedListDetails(votedList)).thenReturn(votedList);
-         assertEquals(votedList,voController.addVotedListDetails(votedList));
+		VotedList votedList =new VotedList();
+		int id = 1;
+		Mockito.when(voController.addVotedListDetails(votedList)).thenReturn(id);
+		assertEquals(id,voController.addVotedListDetails(votedList));
 	 }
 	
 	 @Test
