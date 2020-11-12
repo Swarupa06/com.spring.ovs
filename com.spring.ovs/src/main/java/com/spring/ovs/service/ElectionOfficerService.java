@@ -1,52 +1,126 @@
-package com.ovs.spring.demo;
+package com.spring.ovs.service;
 
-
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.ovs.dao.ElectionOfficerDao;
+import com.spring.ovs.dtos.ElectionOfficer;
+import com.spring.ovs.exceptions.ElectionOfficerNotFoundException;
 
 
 @Service
-public class ElectionOfficerService 
-{
+public class ElectionOfficerService {
+
 	@Autowired
-	ElectionOfficerRepository elRepo;
-	 
-	public List<ElectionOfficer> getAllElectionOfficers()
-	 {
-		List<ElectionOfficer> officer = new ArrayList<ElectionOfficer>(); 
-		System.out.println("Election Officers...");
-		elRepo.findAll().forEach(officer1 -> officer.add(officer1));
-		return officer;
-	 }
-	 public ElectionOfficer viewElectionOfficerById(int officerId) 
-	 {
-	       	return elRepo.findById(officerId).get();
-	 }
-	  
-	 public int addElectionOfficerDetails(ElectionOfficer officer)
-	 {
-	      elRepo.save(officer);
-	      return officer.getOfficerId();
+	private ElectionOfficerDao elDao;
 	
-	 }
-	 
-	 public int updateElectionOfficerDetails(ElectionOfficer officer)
-	 {
-	       	elRepo.save(officer);
-		return officer.getOfficerId();
-	       	
-	 }
 	
-	 public int deleteElectionOfficer(int officerId)
-	 {
-		  elRepo.deleteById(officerId);
-		return officerId;
-	 }
-	 
+	/*
+	  * This is the method for adding Election officer details.
+	 */
+
+	public int addElectionOfficerDetails(ElectionOfficer officer)
+	{
+		if(elDao.existsById(officer.getOfficerId()))
+		{
+			System.out.println("The Officer with this Id already exists...Give another value");
+		     return 0;
+		}
+		else
+		{
+		   return elDao.save(officer).getOfficerId();
+		}
+			 
+	}
+	
+	
+	 /*
+	   * This is the method for Updating the existing Election officer details. 
+	 */
+	
+	
+    public ElectionOfficer updateElectionOfficerDetails(int officerId, ElectionOfficer officer) throws ElectionOfficerNotFoundException
+    {
+
+	      Optional<ElectionOfficer> repOfficer = elDao.findById(officerId);
+
+	        if (!repOfficer.isPresent()) 
+		{
+
+		    ElectionOfficer officerToBeUpdated = repOfficer.get();
+		    officerToBeUpdated.setFirstName(officer.getFirstName());
+		    officerToBeUpdated.setLastName(officer.getLastName());
+		    officerToBeUpdated.setPassword(officer.getPassword());
+		    officerToBeUpdated.setGender(officer.getGender());
+		    officerToBeUpdated.setMobileno(officer.getMobileno());
+		    officerToBeUpdated.setEmailId(officer.getEmailId());
+		    officerToBeUpdated.setAddress1(officer.getAddress1());
+		    officerToBeUpdated.setAddress2(officer.getAddress2());
+		    officerToBeUpdated.setDistrict(officer.getDistrict());
+		    officerToBeUpdated.setPincode(officer.getPincode());
+		 
+		    return elDao.save(officerToBeUpdated);
+	      }
+	      else
+	      {
+				throw new ElectionOfficerNotFoundException("No Officer present with the given Id to Update...Please enter valid Id to update");
+
+	      }
+      }
     
+      
+     /*
+        * This is the method for deleting the existing Election officer details.
+     */
+    
+    
+     public int deleteElectionOfficer(int officerId) throws ElectionOfficerNotFoundException
+     {
+    	 Optional<ElectionOfficer> repOfficer = elDao.findById(officerId);
+    		 
+    	  if(repOfficer.isPresent())
+    	   {
+    	      elDao.deleteById(officerId);
+              System.out.println("Officer details are deleted Successfully");
+    		}
+    	    else
+    		{
+    		    throw new ElectionOfficerNotFoundException("Enter valid Id to be deleted");
+    		}
+		    return officerId;
+      }
+     
+     /*
+        * This method is used to view the particular Election officer details with the entered ID.
+      */
+    
+	 public ElectionOfficer viewElectionOfficerById(int officerId) throws ElectionOfficerNotFoundException
+	 {
+	      Optional<ElectionOfficer> repOfficer = elDao.findById(officerId);
+	      
+	      if(repOfficer.isPresent())
+	      {
+			 return repOfficer.get();
+		  }
+	      else
+	      {
+  		    throw new ElectionOfficerNotFoundException("Enter valid Id to view the Officer details"); 
+	      }
+		
+	 }
+	 
+	 /*
+	  * This method is used to get all the existing Election officers Details.
+	  */
+	 
+	 public List<ElectionOfficer> getAllElectionOfficers()
+	 {
+	 
+		System.out.println("Election Officers...");
+		return elDao.findAll();
+	 }
 }
+
