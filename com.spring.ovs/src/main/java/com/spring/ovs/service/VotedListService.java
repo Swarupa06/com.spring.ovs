@@ -1,149 +1,129 @@
 package com.spring.ovs.service;
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.ovs.dtos.VotedList;
+import com.spring.ovs.exceptions.VoterNotFoundException;
+
 import com.spring.ovs.repository.VotedListRepository;
 
- 
-//defining the business logic
+
+
+
 @Service
 public class VotedListService {
+
 	@Autowired
-	VotedListRepository vlRepo;
+	private VotedListRepository vlRepo;
 	
-	
-	public List<VotedList> getAllVotedList()
-	{
-		List<VotedList> votedList=new ArrayList<VotedList>();
-		System.out.println("VotedLists.........");
-		vlRepo.findAll().forEach(votedList1-> votedList.add(votedList1));
-		return votedList;
-	}
-	public VotedList viewVotedListById(int id)
-	{
-		return vlRepo.findById(id).get();
-	}
-	public VotedList addVotedListDetails(VotedList votedList)
-	{
-		return vlRepo.save(votedList);
-	
-	}
-	public int deleteVotedList(int id)
-	
-	{
-		vlRepo.deleteById(id);
-		return id;
-	}
-	public VotedList updateVotedListDetails(int id,VotedList votedList)
-	{
-		return vlRepo.save(votedList);
-	}
-}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	/*
+	 * This is the method for adding VotedList and if we give the existing ID and execute it then
+	 * in ResponseBody it will show zero and in console it prints "The VotedList with Id already exists....Give another value".
+	 */
 
- 	
- /*	//@Autowired
-	private VotedListRepository votedRepo;
-	private Integer votedId;
- 
-	public int castVotedList(VotedList votedList) throws IllegalArgumentException
+	public int addVotedListDetails(VotedList votedList)
 	{
-	 try
-	 {
-		 votedRepo.save(votedList);
-		return votedList.getId();
+		if(vlRepo.existsById(votedList.getId()))
+		{
+			System.out.println("The VotedList with Id already exists....Give another value");
+		     return 0;
+		}
+		else
+		{
+		   return vlRepo.save(votedList).getId();
+		}
+			 
 	}
-	 catch(IllegalArgumentException e)
+	 
+	
+	/*
+	    * This method is used to view the VotedList List. 
+	 */
+	
+	public List<VotedList> getVotedList()
 	 {
-		 System.out.println("castvotedlist could not be added"); 
-		 e.printStackTrace();
-			return votedList.getId();
-			
+	 
+		System.out.println("VotedList...");
+		return vlRepo.findAll();
 	 }
-	}
-	public VotedList updateVotedListDetails(int id,VotedList votedList) throws CastedVoteNotFoundException {
 	
 	
-        
-		Optional <VotedList> repVotedList = votedRepo.findById(id);
+	/*
+	 * This is the method for Update VotedListDetails and if we give the existing ID and execute it then
+	 * in ResponseBody it will show zero and in console it prints "updated votedlist details successfully".
+	 * 
+	 * else if the given Id does not exist it will throw an Exception that
+	 *  "No votedList present with the given Id to Update...Please enter valid Id to update".
+	 */
+    public VotedList updateVotedListDetails(int id, VotedList votedList) throws VoterNotFoundException
+    {
 
-		if (repVotedList.isPresent()) {
+	      Optional<VotedList> repvotedList = vlRepo.findById(id);
 
-			VotedList votedlistToBeUpdated = repVotedList.get();
-			votedlistToBeUpdated.setId(votedList.getId());
-			votedlistToBeUpdated.setPollingDateTime(votedList.getPollingDateTime());
-			votedlistToBeUpdated.setSociety(votedList.getSociety());
-			votedlistToBeUpdated.setVoter(votedList.getVoter());
-			votedlistToBeUpdated.setCandidate(votedList.getCandidate());
+	        if (repvotedList.isPresent()) {
 
-			return  votedRepo.save(votedlistToBeUpdated);
+	        	VotedList votedListToBeUpdated = repvotedList.get();
+		    votedListToBeUpdated.setId(votedList.getId());
+		    votedListToBeUpdated.setPollingDateTime(votedList.getPollingDateTime());
+		    votedListToBeUpdated.setSociety(votedList.getSociety());
+		    votedListToBeUpdated.setVoter(votedList.getVoter());
+		    votedListToBeUpdated.setCandidate(votedList.getCandidate());
+		    
+		   System.out.println("updated votedlist details successfully");
+		    return vlRepo.save(votedListToBeUpdated);
+	      }
+	      else
+	      {
+				throw new VoterNotFoundException("No votedList present with the given Id to Update...Please enter valid Id to update");
 
-        }
-		else
-        {
-			throw new CastedVoteNotFoundException("votedlist could not be updated");
-        	
-	     }
-
+	      }
+      }
+      
+    /*
+	 * This is the method for delete VotedList and if we give the existing ID and execute it then
+	 * in ResponseBody it will show id and in console it prints "VotedList details are deleted Successfully"
+	 * else if the given Id does not exist it will throw an Exception that "Enter valid Id to be deleted".
+	 */
+     public int deleteVotedList(int id) throws VoterNotFoundException
+     {
+    	 Optional<VotedList> repvotedList = vlRepo.findById(id);
+    		 
+    	  if(repvotedList.isPresent())
+    	   {
+    	      vlRepo.deleteById(id);
+              System.out.println("VotedList details are deleted Successfully");
+    		}
+    	    else
+    		{
+    		    throw new VoterNotFoundException("Enter valid Id to be deleted");
+    		}
+		    return id;
+      }
+     
+     /*
+ 	 * This is the method for view VotedListById and if we give the existing ID shows the Id details
+ 	 * 
+ 	 * else if the given Id does not exist it will throw an Exception that "Enter valid Id to view the votedlist details".
+ 	 */
+    
+	 public VotedList viewVotedListById(int id) throws VoterNotFoundException
+	 {
+	      Optional<VotedList> repvotedList = vlRepo.findById(id);
+	      
+	      if(repvotedList.isPresent())
+	      {
+			 return repvotedList.get();
+		  }
+	      else
+	      {
+  		    throw new VoterNotFoundException("Enter valid Id to view the votedlist details"); 
+	      }
 		
-	}
- 
-	public int deletedVotedListDetails(int id) throws CastedVoteNotFoundException  {
-		
-		{
-			Optional <VotedList> repVotedList = votedRepo.findById(id);
-			if (repVotedList.isPresent())
-			{
-				votedRepo.deleteById(id);
-				System.out.println("votedlist id are deletes successfully");
-			}
-			else
-			{
-				throw new CastedVoteNotFoundException("enter valid id to be deleted");
-			}
-			return id;
+	 }
+	 
+	
+}
 
-		}
-	}
-	
-	public List<VotedList> viewVotedList() {
-		System.out.println("voters...");
-		return votedRepo.findAll();
-	}
-	
-	public int searchByVoterId(int voterId) throws VoterNotFoundException{
-		Optional <VotedList> repVotedList = votedRepo.findById(votedId);
-		if (repVotedList.isPresent())
-		{
-			votedRepo.findById(voterId);
-			System.out.println("votedlist voterid are searched successfully");
-		}
-		else
-		{
-			throw new VoterNotFoundException("enter valid id to be searched");
-		}
-		return voterId;
-	}
-}*/
