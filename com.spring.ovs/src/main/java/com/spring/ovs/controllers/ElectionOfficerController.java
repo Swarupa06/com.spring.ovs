@@ -21,89 +21,126 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.ovs.spring.demo.dtos.ElectionOfficer;
-import com.ovs.spring.demo.exceptions.DuplicateRecordException;
 import com.ovs.spring.demo.exceptions.ElectionOfficerNotFoundException;
 import com.ovs.spring.demo.service.ElectionOfficerService;
 
 
 //connect from postman as http://localhost:8080/officer/
-@RestController
+@Controller
 @RequestMapping("/officer")
 public class ElectionOfficerController
 {
-	/*A Logger object is used to log messages for a specific system or application component.
-	 *Loggers are normally named,using a hierarchical dot-separated namespace.
+      
+	  /*A Logger object is used to log messages for a specific system or application component.
+	   *Loggers are normally named,using a hierarchical dot-separated namespace.
+       */
+	
+	  Logger log = LoggerFactory.getLogger(ElectionOfficerController.class);
+	
+	  
+	  @Autowired    //enables you to inject the object dependency implicitly. It internally uses setter injection.
+	  private ElectionOfficerService eoService;
+	
+	
+     /*
+        * @Author      : Swarupa
+        * 
+        * @Method      : getAllElectionOfficers() 
+        * 
+        * @Return type : ElectionOfficer
+        * 
+        * @Description : This method is used to get all the existing Election officers Details.
      */
-	
-    Logger log = LoggerFactory.getLogger(ElectionOfficerController.class);
-	
-	@Autowired  //enables you to inject the object dependency implicitly. It internally uses setter injection.
-	
-	private ElectionOfficerService elService;
-	
 
-    @GetMapping(value= {"/"})
-    public @ResponseBody List<ElectionOfficer> getAllElectionOfficers() 
-    { 
-    	List<ElectionOfficer> officer=elService.getAllElectionOfficers();
-    	return officer;
-    }
+	
+      @GetMapping(value = {"/" })
+      public @ResponseBody List<ElectionOfficer> getAllElectionOfficers() 
+      { 
+	
+	    List<ElectionOfficer> officer = eoService.getAllElectionOfficers();
+
+	    return officer;
+      }
     
-    @GetMapping("/{officerId}")
-    public ResponseEntity<ElectionOfficer> viewElectionOfficerById(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
-    {
-       if(elService.viewElectionOfficerById(officerId)==null)
+    
+     /*
+        * @Author      : Swarupa
+        * 
+        * @Method      : viewElectionOfficerById()
+        * 
+        * @Parameter   : officerId
+        * 
+        * @Return type : ElectionOfficer
+        * 
+        * @Description : This method is used to view the particular Election officer details with the entered ID.
+     */
+
+    
+     @GetMapping("/{officerId}")
+     public @ResponseBody  ElectionOfficer viewElectionOfficerById(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
+     {
+	
+	    return eoService.viewElectionOfficerById(officerId);
+     }
+     
+     
+     /*
+        * @Author      : Swarupa
+        * 
+        * @Method      : addElectionOfficerDetails()
+        * 
+        * @Parameter   : officerId
+        * 
+        * @Return type : Integer
+        * 
+        * @Description : This is the method for adding Election officer details.
+      */
+
+
+    
+     @PostMapping("/")
+     public @ResponseBody int addElectionOfficerDetails(@RequestBody @Valid ElectionOfficer officer) 
+     {
+	   return eoService.addElectionOfficerDetails(officer);
+     }
+     
+     
+     /*
+        * @Author      : Swarupa
+        * 
+        * @Method      : updateElectionOfficerDetails()
+        * 
+        * @Parameter   : officerId,officer
+        * 
+        * @Return type : Integer
+        *   
+        * @Description : This is the method for Updating the existing Election officer details. 
+      */
+    
+     
+       @PutMapping("/{officerId}")
+       public @ResponseBody ElectionOfficer updateElectionOfficerDetails(@PathVariable int officerId,@RequestBody @Valid ElectionOfficer officer) throws ElectionOfficerNotFoundException 
        {
-    	   throw new ElectionOfficerNotFoundException("Election Officer not found with the Id:"+officerId); 
+	
+	      return eoService.updateElectionOfficerDetails(officerId,officer);
        }
-       else
-       {	   
-	     return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
-       }
-    }
-    
-    @PostMapping("/")
-    public ResponseEntity<ElectionOfficer> addElectionOfficerDetails(@RequestBody @Valid ElectionOfficer officer) throws DuplicateRecordException 
-    {
-	    int officerId=elService.addElectionOfficerDetails(officer);
-    	if(officerId!=0)
-    	{
-    		return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
-    	}
-    	else
-    	{
-    		throw new DuplicateRecordException("Id already exists");
-    	}
-    }
-    
-    @PutMapping("/{officerId}")
-    public ResponseEntity<ElectionOfficer> updateElectionOfficerDetails(@RequestBody @Valid ElectionOfficer officer ) throws ElectionOfficerNotFoundException 
-    {
-    	int officerId=elService.updateElectionOfficerDetails(officer);
-		if(officerId!=0)
-    	{
-			return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
-    	}
-    	else
-    	{	
-    		throw new ElectionOfficerNotFoundException("Officer not found");
-        }
-    }    
-	@DeleteMapping("/{officerId}")
-    public ResponseEntity<ElectionOfficer> deleteElectionOfficer(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
-    {
-    	officerId=elService.deleteElectionOfficer(officerId);
-    	if(officerId!=0)
-    	{
-    		return new ResponseEntity<ElectionOfficer>(elService.viewElectionOfficerById(officerId),HttpStatus.OK);
-    	}
-    	else
-    	{
-    		throw new ElectionOfficerNotFoundException("Election Officer not found with the Id:"+officerId); 
-    	}
-	    
-    }
-    
-    
+       
+      /*
+        * @Author      : Swarupa
+        * 
+        * @Method      : deleteElectionOfficer()
+        * 
+        * @Parameter   : officerId
+        * 
+        * @Return type : Integer
+        * 
+        * @Description : This is the method for deleting the existing Election officer details.
+      */
+
+       @DeleteMapping("/{officerId}")
+       public @ResponseBody int deleteElectionOfficer(@PathVariable int officerId) throws ElectionOfficerNotFoundException 
+      {
+	    return eoService.deleteElectionOfficer(officerId);
+      }
 
 }
