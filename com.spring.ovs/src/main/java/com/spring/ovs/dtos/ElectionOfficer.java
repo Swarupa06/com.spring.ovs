@@ -42,8 +42,6 @@ public class ElectionOfficer {
 	
 	
 	@NotEmpty(message = "Password is required")
-	//@Pattern(regexp="^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$")
-	//@Pattern(regexp="[a-zA-Z]{5,}@&{1}")
 	@Column(name = "password")
 	private String password;
 	
@@ -67,97 +65,118 @@ public class ElectionOfficer {
 	
 	
 	@NotEmpty(message = "Address2 is required")
-	//@Pattern(regexp="^[A-Z]{1}[a-z]{2,9}$")
 	@Column(name = "address2")
 	private String address2;
 	
 	
 	@NotEmpty(message = "District is required")
-	//@Pattern(regexp="^[A-Z]{1}[a-z]{3,9}$")
 	@Column(name = "district")
 	private String district;
 	
 	
 	@NotNull(message = "Pincode is required")
-	//@Pattern(regexp="[A-Za-z0-9]{5}")
 	@Column(name = "pincode")
 	private int pincode;
 	
 	
-	public int getOfficerId() {
+	public int getOfficerId()
+	{
 		return officerId;
 	}
-	public void setOfficerId(int officerId) {
+	public void setOfficerId(int officerId)
+	{
 		this.officerId = officerId;
 	}
-	public String getFirstName() {
+	public String getFirstName() 
+	{
 		return firstName;
 	}
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName)
+	{
 		this.firstName = firstName;
 	}
-	public String getLastName() {
+	public String getLastName()
+	{
 		return lastName;
 	}
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName)
+	{
 		this.lastName = lastName;
 	}
-	public String getPassword() {
+	public String getPassword()
+	{
 		return password;
 	}
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
-	public String getGender() {
+	public String getGender() 
+	{
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(String gender)
+	{
 		this.gender = gender;
 	}
-	public String getMobileno() {
+	public String getMobileno()
+	{
 		return mobileno;
 	}
-	public void setMobileno(String mobileno) {
+	public void setMobileno(String mobileno)
+	{
 		this.mobileno = mobileno;
 	}
-	public String getEmailId() {
+	public String getEmailId()
+	{
 		return emailId;
 	}
-	public void setEmailId(String emailId) {
+	public void setEmailId(String emailId)
+	{
 		this.emailId = emailId;
 	}
-	public String getAddress1() {
+	public String getAddress1()
+	{
 		return address1;
 	}
-	public void setAddress1(String address1) {
+	public void setAddress1(String address1)
+	{
 		this.address1 = address1;
 	}
-	public String getAddress2() {
+	public String getAddress2()
+	{
 		return address2;
 	}
-	public void setAddress2(String address2) {
+	public void setAddress2(String address2)
+	{
 		this.address2 = address2;
 	}
-	public String getDistrict() {
+	public String getDistrict()
+	{
 		return district;
 	}
-	public void setDistrict(String district) {
+	public void setDistrict(String district) 
+	{
 		this.district = district;
 	}
-	public int getPincode() {
+	public int getPincode()
+	{
 		return pincode;
 	}
-	public void setPincode(int pincode) {
+	public void setPincode(int pincode) 
+	{
 		this.pincode = pincode;
 	}
 	
 	
-	public ElectionOfficer() {
+	public ElectionOfficer() 
+	{
 		super();
 	}
 	
 	public ElectionOfficer(String firstName, String lastName, String password, String gender, String mobileno,
-			String emailId, String address1, String address2, String district, int pincode) {
+			String emailId, String address1, String address2, String district, int pincode) 
+	{
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -172,7 +191,8 @@ public class ElectionOfficer {
 	}
 	
 	public ElectionOfficer(int officerId, String firstName, String lastName, String password, String gender,
-			String mobileno, String emailId, String address1, String address2, String district, int pincode) {
+			String mobileno, String emailId, String address1, String address2, String district, int pincode)
+	{
 		super();
 		this.officerId = officerId;
 		this.firstName = firstName;
