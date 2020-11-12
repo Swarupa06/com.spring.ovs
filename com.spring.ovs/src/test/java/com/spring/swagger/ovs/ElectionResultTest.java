@@ -5,6 +5,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.Test;
+import com.spring.ovs.service.ElectionServiceService;
+import com.spring.ovs.dtos.ElectionResult;
 
 public class ElectionResultTest {
 
