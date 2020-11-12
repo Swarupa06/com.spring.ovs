@@ -183,7 +183,6 @@ public class ElectionResult {
 		this.result = result;
 	}
 	
-	}
 	@Override
 	public String toString()
 	{
