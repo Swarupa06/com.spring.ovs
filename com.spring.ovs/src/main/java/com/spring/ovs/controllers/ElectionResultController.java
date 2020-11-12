@@ -25,11 +25,12 @@ import com.spring.ovs.service.ElectionResultService;
 public class ElectionResultController
 { 
 	
-	/*A Logger object is used to log messages for a specific system or application component.
+	/*
+	   * A Logger object is used to log messages for a specific system or application component.
 	   *Loggers are normally named,using a hierarchical dot-separated namespace.
-     */
+         */
    
-    Logger log = LoggerFactory.getLogger(ElectionResultController.class);
+        Logger log = LoggerFactory.getLogger(ElectionResultController.class);
     
 	
 	@Autowired   //enables you to inject the object dependency implicitly. It internally uses setter injection.
