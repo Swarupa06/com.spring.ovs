@@ -29,7 +29,17 @@ public class GlobalExceptionHandler
 			return new ResponseEntity<>(errormessage,HttpStatus.NOT_FOUND);
 		}
 	
+	@ExceptionHandler(VoterNotFoundException.class)
+	public ResponseEntity<?> VoterNotFoundHandling(VoterNotFoundException exception){
+		ErrorDetails errormessage=new ErrorDetails("VoterNotFound",exception.getMessage(),new Date());
+		return new ResponseEntity<>(errormessage,HttpStatus.NOT_FOUND);
+	}
 	
+	@ExceptionHandler(InvalidOperation.class)
+	public ResponseEntity<?> InvalidOperationHandling(InvalidOperation exception){
+		ErrorDetails errormessage=new ErrorDetails("InvalidOperation",exception.getMessage(),new Date());
+		return new ResponseEntity<>(errormessage,HttpStatus.NOT_FOUND);
+	}
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<?> CustomValidationErrorHandling(MethodArgumentNotValidException exception)
 	{
