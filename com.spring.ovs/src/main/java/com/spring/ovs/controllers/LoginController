@@ -18,7 +18,7 @@ import com.spring.ovs.service.LoginService;
 
 
 @Controller
-@RequestMapping("/Login")
+@RequestMapping("/login")
 public class LoginController {
 	@Autowired
 	private LoginService loginService;
