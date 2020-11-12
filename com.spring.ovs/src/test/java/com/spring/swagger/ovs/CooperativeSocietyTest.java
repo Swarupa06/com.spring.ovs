@@ -13,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import com.spring.swagger.ovs.controllers.CooperativeSocietyController;
-import com.spring.swagger.ovs.dtos.CooperativeSociety;
-import com.spring.swagger.ovs.exceptions.SocietyNotFoundException;
-import com.spring.swagger.ovs.service.CooperativeSocietyService;
+import com.spring.ovs.controllers.CooperativeSocietyController;
+import com.spring.ovs.dtos.CooperativeSociety;
+import com.spring.ovs.exceptions.SocietyNotFoundException;
+import com.spring.ovs.service.CooperativeSocietyService;
 
 
 
