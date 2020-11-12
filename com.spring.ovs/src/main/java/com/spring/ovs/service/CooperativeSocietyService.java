@@ -6,9 +6,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.swagger.ovs.dtos.CooperativeSociety;
-import com.spring.swagger.ovs.exceptions.SocietyNotFoundException;
-import com.spring.swagger.ovs.repository.CooperativeSocietyRepository;
+import com.spring.ovs.dtos.CooperativeSociety;
+import com.spring.ovs.exceptions.SocietyNotFoundException;
+import com.spring.ovs.repository.CooperativeSocietyRepository;
 
 
 
