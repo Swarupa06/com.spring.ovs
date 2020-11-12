@@ -1,4 +1,4 @@
-package com.ovs.spring.demo;
+package com.spring.ovs.exceptions;
 
 import java.util.Date;
 
